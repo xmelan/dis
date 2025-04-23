@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Plus, Edit, Trash2, Phone, Mail, MapPin } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import { useNavigate } from 'react-router-dom';
 
 interface Client {
   id: string;
@@ -16,6 +17,7 @@ function ClientList() {
   const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchClients();
@@ -38,6 +40,10 @@ function ClientList() {
     }
   };
 
+  const handleNavigateToNewClient = () => {
+    navigate('/clientes/nuevo');
+  };
+
   if (loading) return <div className="p-4">Cargando clientes...</div>;
   if (error) return <div className="p-4 text-red-600">{error}</div>;
 
@@ -45,7 +51,8 @@ function ClientList() {
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Clientes</h2>
-        <button className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+        <button className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors"
+          onClick={handleNavigateToNewClient}>
           <Plus className="w-5 h-5" />
           Nuevo Cliente
         </button>
@@ -65,7 +72,7 @@ function ClientList() {
                 </button>
               </div>
             </div>
-            
+
             <div className="space-y-3 text-gray-600">
               <p className="flex items-center gap-2">
                 <span className="font-medium">Contacto:</span> {client.contact_person}

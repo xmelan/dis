@@ -15,6 +15,7 @@ import RoleBasedRoute from './components/RoleBasedRoute';
 import UserList from './components/users/UserList';
 import RoleList from './components/roles/RoleList';
 import NewSupplier from './components/suppliers/NewSupplier';
+import NewClient from './components/clients/NewClient';
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
-          
+
           <Route
             path="/dashboard"
             element={
@@ -65,7 +66,7 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
           <Route
             path="/suplidores"
             element={
@@ -80,7 +81,7 @@ function App() {
             }
           />
 
-<Route
+          <Route
             path="/suplidores/nuevo"
             element={
               <RoleBasedRoute allowedRoles={['admin', 'warehouse_manager']}>
@@ -93,7 +94,7 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
           <Route
             path="/inventario/entrada"
             element={
@@ -107,7 +108,7 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
           <Route
             path="/inventario/lista"
             element={
@@ -121,7 +122,7 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
           <Route
             path="/clientes"
             element={
@@ -135,7 +136,21 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
+          <Route
+            path="/clientes/nuevo"
+            element={
+              <RoleBasedRoute allowedRoles={['admin', 'sales_rep']}>
+                <div className="flex h-screen bg-gray-50">
+                  <Sidebar />
+                  <div className="flex-1 overflow-auto">
+                    <NewClient />
+                  </div>
+                </div>
+              </RoleBasedRoute>
+            }
+          />
+
           <Route
             path="/ventas"
             element={
@@ -149,7 +164,7 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
           <Route
             path="/reportes"
             element={
@@ -163,7 +178,7 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </Router>
