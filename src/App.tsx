@@ -14,6 +14,7 @@ import Unauthorized from './components/Unauthorized';
 import RoleBasedRoute from './components/RoleBasedRoute';
 import UserList from './components/users/UserList';
 import RoleList from './components/roles/RoleList';
+import NewSupplier from './components/suppliers/NewSupplier';
 
 function App() {
   return (
@@ -73,6 +74,20 @@ function App() {
                   <Sidebar />
                   <div className="flex-1 overflow-auto">
                     <SupplierList />
+                  </div>
+                </div>
+              </RoleBasedRoute>
+            }
+          />
+
+<Route
+            path="/suplidores/nuevo"
+            element={
+              <RoleBasedRoute allowedRoles={['admin', 'warehouse_manager']}>
+                <div className="flex h-screen bg-gray-50">
+                  <Sidebar />
+                  <div className="flex-1 overflow-auto">
+                    <NewSupplier />
                   </div>
                 </div>
               </RoleBasedRoute>
