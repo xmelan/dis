@@ -1,5 +1,5 @@
 import React from 'react';
-import { Building2, Package, Users, TrendingUp, Truck, ClipboardList, LogOut, PackagePlus, UserCog, Shield } from 'lucide-react';
+import { Building2, Package, Users, TrendingUp, Truck, ClipboardList, LogOut, PackagePlus, UserCog, Shield, Barcode, Receipt } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -57,6 +57,12 @@ function Sidebar() {
       ]
     },
     { 
+      icon: Barcode, 
+      label: 'Productos', 
+      path: '/productos/lista',
+      roles: ['admin']
+    },
+    { 
       icon: Truck, 
       label: 'Suplidores', 
       path: '/suplidores',
@@ -75,15 +81,15 @@ function Sidebar() {
       roles: ['admin', 'sales_rep']
     },
     { 
+      icon: Receipt, 
+      label: 'Ordenes de Ventas', 
+      path: '/ordenes/lista',
+      roles: ['admin']
+    },
+    { 
       icon: ClipboardList, 
       label: 'Reportes', 
       path: '/reportes',
-      roles: ['admin']
-    },
-    {
-      icon: UserCog,
-      label: 'Usuarios',
-      path: '/usuarios',
       roles: ['admin']
     },
     {

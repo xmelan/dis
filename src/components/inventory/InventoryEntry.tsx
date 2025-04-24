@@ -16,7 +16,7 @@ interface InventoryEntryForm {
   total_price: number;
   entry_date: string;
   invoice_number: string;
-  notes: string;
+  // notes: string;
 }
 
 const initialForm: InventoryEntryForm = {
@@ -28,7 +28,7 @@ const initialForm: InventoryEntryForm = {
   total_price: 0,
   entry_date: new Date().toISOString().split('T')[0],
   invoice_number: '',
-  notes: '',
+  // notes: '',
 };
 
 function InventoryEntry() {
@@ -80,10 +80,11 @@ function InventoryEntry() {
     setError(null);
     setSuccess(false);
 
+    console.log(user);
     try {
       const { error } = await supabase.from('inventory_entries').insert({
         ...form,
-        created_by: user?.id,
+        // created_by: user?.id,
         entry_date: new Date(form.entry_date).toISOString(),
       });
 
@@ -241,7 +242,7 @@ function InventoryEntry() {
           </div>
         </div>
 
-        <div>
+        {/* <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Notas
           </label>
@@ -252,7 +253,7 @@ function InventoryEntry() {
             rows={3}
             className="w-full p-2 border rounded focus:ring-2 focus:ring-primary"
           />
-        </div>
+        </div> */}
 
         <div className="flex justify-end">
           <button

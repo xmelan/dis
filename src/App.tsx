@@ -17,7 +17,10 @@ import RoleList from './components/roles/RoleList';
 import NewSupplier from './components/suppliers/NewSupplier';
 import NewClient from './components/clients/NewClient';
 import NewSale from './components/sales/NewSale';
-import NewRole from './components/roles/NewRole';
+import ProductList from './components/products/ProductList';
+import NewProduct from './components/products/NewProduct';
+import OrderItemsList from './components/orders/OrderItemsList';
+import OrderList from './components/orders/OrderList';
 
 function App() {
   return (
@@ -98,6 +101,34 @@ function App() {
           />
 
           <Route
+            path="/productos/lista"
+            element={
+              <RoleBasedRoute allowedRoles={['admin']}>
+                <div className="flex h-screen bg-gray-50">
+                  <Sidebar />
+                  <div className="flex-1 overflow-auto">
+                    <ProductList />
+                  </div>
+                </div>
+              </RoleBasedRoute>
+            }
+          />
+
+<Route
+            path="/productos/nuevo"
+            element={
+              <RoleBasedRoute allowedRoles={['admin']}>
+                <div className="flex h-screen bg-gray-50">
+                  <Sidebar />
+                  <div className="flex-1 overflow-auto">
+                    <NewProduct />
+                  </div>
+                </div>
+              </RoleBasedRoute>
+            }
+          />
+
+          <Route
             path="/inventario/entrada"
             element={
               <RoleBasedRoute allowedRoles={['admin', 'warehouse_manager']}>
@@ -119,6 +150,20 @@ function App() {
                   <Sidebar />
                   <div className="flex-1 overflow-auto">
                     <InventoryList />
+                  </div>
+                </div>
+              </RoleBasedRoute>
+            }
+          />
+
+          <Route
+            path="/ordenes/lista"
+            element={
+              <RoleBasedRoute allowedRoles={['admin', 'warehouse_manager', 'sales_rep']}>
+                <div className="flex h-screen bg-gray-50">
+                  <Sidebar />
+                  <div className="flex-1 overflow-auto">
+                    <OrderList />
                   </div>
                 </div>
               </RoleBasedRoute>
@@ -167,7 +212,7 @@ function App() {
             }
           />
 
-<Route
+          <Route
             path="/ventas/nueva"
             element={
               <RoleBasedRoute allowedRoles={['admin', 'sales_rep']}>
