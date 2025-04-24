@@ -14,6 +14,13 @@ import Unauthorized from './components/Unauthorized';
 import RoleBasedRoute from './components/RoleBasedRoute';
 import UserList from './components/users/UserList';
 import RoleList from './components/roles/RoleList';
+import NewSupplier from './components/suppliers/NewSupplier';
+import NewClient from './components/clients/NewClient';
+import NewSale from './components/sales/NewSale';
+import ProductList from './components/products/ProductList';
+import NewProduct from './components/products/NewProduct';
+import OrderItemsList from './components/orders/OrderItemsList';
+import OrderList from './components/orders/OrderList';
 
 function App() {
   return (
@@ -22,7 +29,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
-          
+
           <Route
             path="/dashboard"
             element={
@@ -64,7 +71,7 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
           <Route
             path="/suplidores"
             element={
@@ -78,7 +85,49 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
+          <Route
+            path="/suplidores/nuevo"
+            element={
+              <RoleBasedRoute allowedRoles={['admin', 'warehouse_manager']}>
+                <div className="flex h-screen bg-gray-50">
+                  <Sidebar />
+                  <div className="flex-1 overflow-auto">
+                    <NewSupplier />
+                  </div>
+                </div>
+              </RoleBasedRoute>
+            }
+          />
+
+          <Route
+            path="/productos/lista"
+            element={
+              <RoleBasedRoute allowedRoles={['admin']}>
+                <div className="flex h-screen bg-gray-50">
+                  <Sidebar />
+                  <div className="flex-1 overflow-auto">
+                    <ProductList />
+                  </div>
+                </div>
+              </RoleBasedRoute>
+            }
+          />
+
+<Route
+            path="/productos/nuevo"
+            element={
+              <RoleBasedRoute allowedRoles={['admin']}>
+                <div className="flex h-screen bg-gray-50">
+                  <Sidebar />
+                  <div className="flex-1 overflow-auto">
+                    <NewProduct />
+                  </div>
+                </div>
+              </RoleBasedRoute>
+            }
+          />
+
           <Route
             path="/inventario/entrada"
             element={
@@ -92,7 +141,7 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
           <Route
             path="/inventario/lista"
             element={
@@ -106,7 +155,21 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
+          <Route
+            path="/ordenes/lista"
+            element={
+              <RoleBasedRoute allowedRoles={['admin', 'warehouse_manager', 'sales_rep']}>
+                <div className="flex h-screen bg-gray-50">
+                  <Sidebar />
+                  <div className="flex-1 overflow-auto">
+                    <OrderList />
+                  </div>
+                </div>
+              </RoleBasedRoute>
+            }
+          />
+
           <Route
             path="/clientes"
             element={
@@ -120,7 +183,21 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
+          <Route
+            path="/clientes/nuevo"
+            element={
+              <RoleBasedRoute allowedRoles={['admin', 'sales_rep']}>
+                <div className="flex h-screen bg-gray-50">
+                  <Sidebar />
+                  <div className="flex-1 overflow-auto">
+                    <NewClient />
+                  </div>
+                </div>
+              </RoleBasedRoute>
+            }
+          />
+
           <Route
             path="/ventas"
             element={
@@ -134,7 +211,21 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
+          <Route
+            path="/ventas/nueva"
+            element={
+              <RoleBasedRoute allowedRoles={['admin', 'sales_rep']}>
+                <div className="flex h-screen bg-gray-50">
+                  <Sidebar />
+                  <div className="flex-1 overflow-auto">
+                    <NewSale />
+                  </div>
+                </div>
+              </RoleBasedRoute>
+            }
+          />
+
           <Route
             path="/reportes"
             element={
@@ -148,7 +239,7 @@ function App() {
               </RoleBasedRoute>
             }
           />
-          
+
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </Router>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Plus, FileText, Package } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 interface Sale {
   id: string;
@@ -18,6 +19,7 @@ function SalesList() {
   const [sales, setSales] = useState<Sale[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchSales();
@@ -84,6 +86,10 @@ function SalesList() {
     }
   };
 
+  const handleNavigateToNewSale = () => {
+    navigate('/ventas/nueva');
+  };
+
   if (loading) return <div className="p-4">Cargando ventas...</div>;
   if (error) return <div className="p-4 text-red-600">{error}</div>;
 
@@ -91,7 +97,10 @@ function SalesList() {
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Ventas</h2>
-        <button className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+        <button 
+          className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors"
+          onClick={handleNavigateToNewSale}
+        >
           <Plus className="w-5 h-5" />
           Nueva Venta
         </button>
