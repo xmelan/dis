@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Shield } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import { useNavigate } from 'react-router-dom';
 
 interface Role {
   id: string;
@@ -19,6 +20,7 @@ function RoleList() {
     name: '',
     description: ''
   });
+const navigate = useNavigate();
 
   useEffect(() => {
     fetchRoles();
