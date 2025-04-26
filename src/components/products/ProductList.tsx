@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 import { Plus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -51,7 +51,7 @@ function ProductList() {
 
         <div className="p-6">
             <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6">Listado de Productos</h2>
+                <h2 className="text-2xl font-bold text-gray-800">Productos</h2>
                 <button
                     className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors"
                     onClick={handleNavigateToNewProduct}
@@ -61,31 +61,33 @@ function ProductList() {
                 </button>
             </div>
 
-            <div className="overflow-x-auto">
-                <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow">
-                    <thead>
-                        <tr className="bg-gray-100">
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Nombre</th>
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Stock Actual</th>
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Unidad</th>
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Umbral de Stock</th>
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Última Actualización</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map(product => (
-                            <tr key={product.id} className="border-t">
-                                <td className="px-4 py-2 text-sm text-gray-800">{product.name}</td>
-                                <td className="px-4 py-2 text-sm text-gray-800">{product.current_stock}</td>
-                                <td className="px-4 py-2 text-sm text-gray-800">{product.unit}</td>
-                                <td className="px-4 py-2 text-sm text-gray-800">{product.stock_threshold}</td>
-                                <td className="px-4 py-2 text-sm text-gray-800">
-                                    {new Date(product.updated_at).toLocaleDateString()}
-                                </td>
+            <div className="bg-white rounded-lg shadow overflow-hidden">
+                <div className="overflow-x-auto">
+                    <table className="w-full">
+                        <thead className='bg-gray-50'>
+                            <tr className="bg-gray-100">
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock Actual</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Unidad</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Umbral de Stock</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Última Actualización</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {products.map(product => (
+                                <tr key={product.id} className="border-t">
+                                    <td className="px-6 py-4 whitespace-nowrap">{product.name}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{product.current_stock}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{product.unit}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{product.stock_threshold}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {new Date(product.updated_at).toLocaleDateString()}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );

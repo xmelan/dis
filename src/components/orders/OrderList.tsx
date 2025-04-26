@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 
 interface Order {
@@ -54,35 +54,40 @@ function OrderList() {
   if (error) return <div className="p-4 text-red-600">{error}</div>;
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Listado de Órdenes</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Cliente</th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Estado</th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Monto Total</th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Fecha de Creación</th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Última Actualización</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map(order => (
-              <tr key={order.id} className="border-t">
-                <td className="px-4 py-2 text-sm text-gray-800">{order.client_name}</td>
-                <td className="px-4 py-2 text-sm text-gray-800">{order.status}</td>
-                <td className="px-4 py-2 text-sm text-gray-800">{order.total_amount.toFixed(2)}</td>
-                <td className="px-4 py-2 text-sm text-gray-800">
-                  {new Date(order.created_at).toLocaleDateString()}
-                </td>
-                <td className="px-4 py-2 text-sm text-gray-800">
-                  {new Date(order.updated_at).toLocaleDateString()}
-                </td>
+    <div className="p-6 pb-2">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">Listado de Órdenes</h2>
+      </div>
+
+      <div className='bg-white rounded-lg shadow-md overflow-hidden'>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className='bg-gray-50'>
+              <tr className="bg-gray-100">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">Cliente</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">Estado</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">Monto Total</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">Fecha de Creación</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">Última Actualización</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {orders.map(order => (
+                <tr key={order.id} className="border-t">
+                  <td className="px-6 py-4 whitespace-nowrap">{order.client_name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{order.status}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{order.total_amount.toFixed(2)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {new Date(order.created_at).toLocaleDateString()}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {new Date(order.updated_at).toLocaleDateString()}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
