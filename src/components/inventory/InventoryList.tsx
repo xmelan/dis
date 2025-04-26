@@ -122,7 +122,6 @@ function InventoryList() {
 
     setEditLoading(true);
     try {
-      // Calculate total price
       const quantity = Number(editForm.quantity);
       const unitPrice = Number(editForm.unit_price);
       const totalPrice = quantity * unitPrice;
@@ -137,7 +136,6 @@ function InventoryList() {
 
       if (error) throw error;
 
-      // Refresh the entries list
       await fetchInventoryEntries();
       
       setShowEditModal(false);
@@ -195,7 +193,7 @@ function InventoryList() {
                   Suplidor
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Cantidad
+                  Cantidad | Unidad
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Precio Unit.
@@ -445,18 +443,6 @@ function InventoryList() {
                     </option>
                   ))}
                 </select>
-              </div>
-              <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Notas
-                </label>
-                <textarea
-                  name="notes"
-                  value={editForm.notes || ''}
-                  onChange={handleEditFormChange}
-                  rows={3}
-                  className="w-full p-2 border rounded focus:ring-2 focus:ring-primary"
-                />
               </div>
               <div className="flex justify-end gap-4 mt-6">
                 <button

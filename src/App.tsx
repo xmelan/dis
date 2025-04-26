@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import Login from './components/Login';
@@ -19,7 +18,6 @@ import NewClient from './components/clients/NewClient';
 import NewSale from './components/sales/NewSale';
 import ProductList from './components/products/ProductList';
 import NewProduct from './components/products/NewProduct';
-import OrderItemsList from './components/orders/OrderItemsList';
 import OrderList from './components/orders/OrderList';
 
 function App() {
@@ -28,7 +26,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/unauthorized" element={<Unauthorized />} />
+          {/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
 
           <Route
             path="/dashboard"

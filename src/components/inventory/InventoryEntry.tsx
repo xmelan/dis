@@ -80,11 +80,9 @@ function InventoryEntry() {
     setError(null);
     setSuccess(false);
 
-    console.log(user);
     try {
       const { error } = await supabase.from('inventory_entries').insert({
         ...form,
-        // created_by: user?.id,
         entry_date: new Date(form.entry_date).toISOString(),
       });
 
